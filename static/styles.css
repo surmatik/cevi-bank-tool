@@ -1,0 +1,177 @@
+/* Allgemeine Stile für größere Bildschirme (Desktops und Tablets) */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+}
+
+header {
+    background-color: #253b8a;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+header img {
+    height: 40px;  /* Logo verkleinern */
+    width: auto;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+nav a:hover {
+    background-color: #253b8a;
+}
+
+/* Hamburger-Icon */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+/* Container für Mobil-Layout */
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+button, input, select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #253b8a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgb(35, 50, 64);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+table thead tr {
+    background-color: #253b8a;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 1px solid #253b8a;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Media Queries für mobile Geräte (Bildschirme bis 600px) */
+@media (max-width: 600px) {
+    header {
+        padding: 20px 20px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header img {
+        height: 40px;  /* Logo für Mobile verkleinern */
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #253b8a;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .container {
+        margin: 0px auto;
+        padding: 15px;
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    table, th, td {
+        font-size: 0.9em;
+    }
+
+    button, input, select {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

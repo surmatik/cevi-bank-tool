@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Geld auszahlen</h2>
+    <form id="withdraw_form">
+        <label for="withdraw_name">Benutzername:</label>
+        <select id="withdraw_name">
+            <option value="">--Benutzer auswählen--</option>
+        </select>
+
+        <label for="withdraw_amount">Betrag:</label>
+        <input type="number" step="0.01" id="withdraw_amount" placeholder="Betrag">
+
+        <button type="submit">Auszahlen</button>
+    </form>
+
+    <script>
+        // Laden der Benutzer für das Dropdown-Menü
+        function loadUsers() {
+            fetch('/get_users')
+            .then(response => response.json())
+            .then(users => {
+                const dropdown = document.getElementById('withdraw_name');
+                users.forEach(user => {
+                    let option = document.createElement('option');
+                    option.value = user;
+                    option.textContent = user;
+                    dropdown.appendChild(option);
+                });
+            });
+        }
+
+        // Auszahlung durchführen
+        document.getElementById('withdraw_form').onsubmit = function(event) {
+            event.preventDefault();
+            const player_name = document.getElementById('withdraw_name').value;
+            const amount = document.getElementById('withdraw_amount').value;
+
+            if (!player_name || !amount) {
+                alert("Bitte füllen Sie alle Felder aus.");
+                return;
+            }
+
+            fetch('/withdraw', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `player_name=${player_name}&amount=${amount}`
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        };
+
+        // Benutzer beim Laden der Seite laden
+        window.onload = loadUsers;
+    </script>
+{% endblock %}

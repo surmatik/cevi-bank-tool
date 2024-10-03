@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Konto-Verlauf für {{ player_name }}</h2>
+    
+    <p><strong>Aktueller Kontostand:</strong> {{ current_balance | round(2) }} CHF</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Typ</th>
+                <th>Betrag</th>
+                <th>Zeitstempel</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in account_history %}
+            <tr>
+                <td>{{ entry.type }}</td>
+                <td>{{ entry.amount | round(2) }} CHF</td>
+                <td>{{ entry.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

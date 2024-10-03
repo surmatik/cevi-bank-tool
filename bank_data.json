@@ -1,0 +1,136 @@
+{
+    "accounts": {
+        "Lino": 116.02301421218212,
+        "Janic": 46.40920568487285
+    },
+    "account_history": {
+        "Lino": [
+            {
+                "type": "Einzahlung",
+                "amount": 100.0,
+                "timestamp": "2024-10-03 21:31:30"
+            },
+            {
+                "type": "Einzahlung",
+                "amount": 50.0,
+                "timestamp": "2024-10-03 21:31:39"
+            },
+            {
+                "type": "Einzahlung",
+                "amount": 10.0,
+                "timestamp": "2024-10-03 21:31:45"
+            },
+            {
+                "type": "Auszahlung",
+                "amount": -60.0,
+                "timestamp": "2024-10-03 21:31:57"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 2.502721539713928,
+                "timestamp": "2024-10-03 21:36:04"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 3.7936820454414617,
+                "timestamp": "2024-10-03 21:41:04"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 1.7909390360286341,
+                "timestamp": "2024-10-03 21:46:05"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 3.7135997004010752,
+                "timestamp": "2024-10-03 21:51:05"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 4.222071890597028,
+                "timestamp": "2024-10-03 21:56:05"
+            }
+        ],
+        "Janic": [
+            {
+                "type": "Einzahlung",
+                "amount": 50.0,
+                "timestamp": "2024-10-03 21:31:35"
+            },
+            {
+                "type": "Auszahlung",
+                "amount": -10.0,
+                "timestamp": "2024-10-03 21:31:50"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 1.0010886158855712,
+                "timestamp": "2024-10-03 21:36:04"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 1.5174728181765846,
+                "timestamp": "2024-10-03 21:41:04"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 0.7163756144114537,
+                "timestamp": "2024-10-03 21:46:05"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 1.48543988016043,
+                "timestamp": "2024-10-03 21:51:05"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 1.6888287562388111,
+                "timestamp": "2024-10-03 21:56:05"
+            }
+        ]
+    },
+    "interest_rate_min": 0.01,
+    "interest_rate_max": 0.05,
+    "interest_history": [
+        {
+            "timestamp": "2024-10-03 21:36:04",
+            "rate": 0.02502721539713928,
+            "accounts": {
+                "Lino": 2.502721539713928,
+                "Janic": 1.0010886158855712
+            }
+        },
+        {
+            "timestamp": "2024-10-03 21:41:04",
+            "rate": 0.03701054946108555,
+            "accounts": {
+                "Lino": 3.7936820454414617,
+                "Janic": 1.5174728181765846
+            }
+        },
+        {
+            "timestamp": "2024-10-03 21:46:05",
+            "rate": 0.016848538385345186,
+            "accounts": {
+                "Lino": 1.7909390360286341,
+                "Janic": 0.7163756144114537
+            }
+        },
+        {
+            "timestamp": "2024-10-03 21:51:05",
+            "rate": 0.03435739662336048,
+            "accounts": {
+                "Lino": 3.7135997004010752,
+                "Janic": 1.48543988016043
+            }
+        },
+        {
+            "timestamp": "2024-10-03 21:56:05",
+            "rate": 0.03776418877090166,
+            "accounts": {
+                "Lino": 4.222071890597028,
+                "Janic": 1.6888287562388111
+            }
+        }
+    ]
+}

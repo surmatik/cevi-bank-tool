@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Einzahlung</h2>
+    <select id="deposit_name">
+        <option value="">--Benutzer auswählen--</option>
+    </select>
+    <input type="number" id="deposit_amount" placeholder="Betrag">
+    <button onclick="deposit()">Einzahlen</button>
+
+    <script>
+        function loadUsers() {
+            fetch('/get_users')
+            .then(response => response.json())
+            .then(users => {
+                const dropdown = document.getElementById('deposit_name');
+                users.forEach(user => {
+                    let option = document.createElement('option');
+                    option.value = user;
+                    option.textContent = user;
+                    dropdown.appendChild(option);
+                });
+            });
+        }
+
+        function deposit() {
+            const player_name = document.getElementById('deposit_name').value;
+            const amount = document.getElementById('deposit_amount').value;
+            if (!player_name) {
+                alert("Bitte wähle einen Benutzer aus.");
+                return;
+            }
+            fetch('/deposit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `player_name=${player_name}&amount=${amount}`
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        }
+
+        window.onload = loadUsers;
+    </script>
+{% endblock %}

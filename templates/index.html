@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>Cevi City Bank</h1>
+    <h2>Zinsverlauf</h2>
+    <canvas id="interest_chart" width="400" height="200"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Zinsverlauf-Grafik
+        function loadInterestHistory() {
+            fetch('/get_interest_history')
+            .then(response => response.json())
+            .then(history => {
+                const timestamps = history.map(entry => entry.timestamp);
+                const interestRates = history.map(entry => (entry.rate * 100).toFixed(2)); // Prozent
+
+                const ctx = document.getElementById('interest_chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: timestamps,
+                        datasets: [{
+                            label: 'Zinssatz (%)',
+                            data: interestRates,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        window.onload = loadInterestHistory;
+    </script>
+{% endblock %}

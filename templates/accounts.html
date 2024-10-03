@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Konten anzeigen</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Benutzername</th>
+                <th>Kontostand</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user, balance in accounts.items() %}
+            <tr>
+                <td><a href="/account/{{ user }}">{{ user }}</a></td>
+                <td>{{ balance | round(2) }} CHF</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
