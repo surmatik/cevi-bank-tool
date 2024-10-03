@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: ghcr.io/surmatik/cevicity-bank:latest
+    build: .
     ports:
       - "5000:5000"
     volumes:
