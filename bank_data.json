@@ -1,10 +1,21 @@
 {
     "accounts": {
-        "Tweet": 0,
-        "Pixel": 8.0
+        "Tweet": 0.0,
+        "Pixel": 8.374633414725045
     },
     "account_history": {
-        "Tweet": [],
+        "Tweet": [
+            {
+                "type": "Zinsen",
+                "amount": 0.0,
+                "timestamp": "2024-10-04 19:24:51"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 0.0,
+                "timestamp": "2024-10-04 19:29:52"
+            }
+        ],
         "Pixel": [
             {
                 "type": "Einzahlung",
@@ -15,10 +26,37 @@
                 "type": "Auszahlung",
                 "amount": -2.0,
                 "timestamp": "2024-10-04 18:47:50"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 0.08822030082801209,
+                "timestamp": "2024-10-04 19:24:51"
+            },
+            {
+                "type": "Zinsen",
+                "amount": 0.2864131138970325,
+                "timestamp": "2024-10-04 19:29:52"
             }
         ]
     },
     "interest_rate_min": 0.01,
     "interest_rate_max": 0.05,
-    "interest_history": []
+    "interest_history": [
+        {
+            "timestamp": "2024-10-04 19:24:51",
+            "rate": 0.011027537603501511,
+            "accounts": {
+                "Tweet": 0.0,
+                "Pixel": 0.08822030082801209
+            }
+        },
+        {
+            "timestamp": "2024-10-04 19:29:52",
+            "rate": 0.03541114154218965,
+            "accounts": {
+                "Tweet": 0.0,
+                "Pixel": 0.2864131138970325
+            }
+        }
+    ]
 }

@@ -209,6 +209,33 @@ button.submit-button:hover {
 }
 
 /* Media Queries für mobile Geräte */
+@media (max-width: 768px) {
+    /* Formulare untereinander auf kleineren Bildschirmen */
+    .settings-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .settings-container > div {
+        max-width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button-row {
+        justify-content: flex-start;
+    }
+
+    .danger-zone {
+        margin-top: 30px;
+        padding: 20px;
+    }
+}
+
+/* Anpassungen für sehr kleine Bildschirme (bis 600px) */
 @media (max-width: 600px) {
     header {
         padding: 20px;
