@@ -1,4 +1,4 @@
-/* Allgemeine Stile für größere Bildschirme (Desktops und Tablets) */
+/* Allgemeine Stile */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -17,7 +17,7 @@ header {
 }
 
 header img {
-    height: 40px;  /* Logo verkleinern */
+    height: 40px;
     width: auto;
 }
 
@@ -39,7 +39,6 @@ nav a:hover {
     background-color: #253b8a;
 }
 
-/* Hamburger-Icon */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -53,7 +52,6 @@ nav a:hover {
     background-color: white;
 }
 
-/* Container für Mobil-Layout */
 .container {
     max-width: 1200px;
     margin: 50px auto;
@@ -114,24 +112,111 @@ table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
-table tbody tr:last-of-type {
-    border-bottom: 1px solid #253b8a;
-}
-
 table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Media Queries für mobile Geräte (Bildschirme bis 600px) */
+/* Danger Zone */
+.danger-zone {
+    border: 2px solid #e74c3c;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9ebea;
+    margin-top: 20px;
+}
+
+.danger-zone h2 {
+    color: #e74c3c;
+}
+
+.danger-zone p {
+    color: #c0392b;
+}
+
+button.danger {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.danger:hover {
+    background-color: #c0392b;
+}
+
+/* Formulareinstellungen */
+form {
+    margin-bottom: 60px;
+}
+
+/* Flexbox-Container für die Formulare */
+.settings-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.settings-container > div {
+    flex: 1;
+    min-width: 300px;
+    max-width: 48%;
+}
+
+/* Flexbox für Eingabefelder im Formular */
+.form-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.form-row div {
+    flex: 1;
+    min-width: 150px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button.submit-button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #253b8a;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button.submit-button:hover {
+    background-color: #34495e;
+}
+
+/* Media Queries für mobile Geräte */
 @media (max-width: 600px) {
     header {
-        padding: 20px 20px;
-        flex-direction: row;
+        padding: 20px;
         justify-content: space-between;
     }
 
     header img {
-        height: 40px;  /* Logo für Mobile verkleinern */
+        height: 40px;
     }
 
     nav {
@@ -159,7 +244,7 @@ table tbody tr:hover {
     }
 
     .container {
-        margin: 0px auto;
+        margin: 0 auto;
         padding: 15px;
         max-width: 100%;
         border-radius: 0;

@@ -1,19 +1,46 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Zinssatzbereich festlegen</h2>
-    <form id="interest_form">
-        <label for="min_rate">Min Zinssatz (%):</label>
-        <input type="number" step="0.01" id="min_rate" value="{{ min_rate }}" placeholder="Min Zinssatz">
-        
-        <label for="max_rate">Max Zinssatz (%):</label>
-        <input type="number" step="0.01" id="max_rate" value="{{ max_rate }}" placeholder="Max Zinssatz">
-        
-        <button type="submit">Zinssatz aktualisieren</button>
-    </form>
+    <!-- Flexbox-Container für die Einstellungen -->
+    <div class="settings-container">
+        <div>
+            <h2>Zinssatzbereich</h2>
+            <form id="interest_form">
+                <div class="form-row">
+                    <div>
+                        <label for="min_rate">Min Zinssatz (%):</label>
+                        <input type="number" step="0.01" min="-100" id="min_rate" value="{{ min_rate }}" placeholder="Min Zinssatz">
+                    </div>
+                    <div>
+                        <label for="max_rate">Max Zinssatz (%):</label>
+                        <input type="number" step="0.01" min="-100" id="max_rate" value="{{ max_rate }}" placeholder="Max Zinssatz">
+                    </div>
+                </div>
+                <button type="submit">Zinssatz aktualisieren</button>
+            </form>            
+        </div>
+
+        <div>
+            <h2>Intervall für Zinsberechnung</h2>
+            <form id="interval_form">
+                <label for="interval">Intervall in Sekunden:</label>
+                <input type="number" id="interval" value="{{ interval }}" placeholder="Intervall in Sekunden">
+                <div class="button-row">
+                    <button type="submit" class="submit-button">Intervall aktualisieren</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="danger-zone">
+        <h2>Daten zurücksetzen</h2>
+        <p>Achtung: Durch das Zurücksetzen der Daten werden alle Konten, Transaktionen und Einstellungen gelöscht.</p>
+        <button id="reset_button" class="danger">Alle Daten zurücksetzen</button>
+    </div>
 
     <script>
-        // Funktion zum Festlegen des Zinssatzbereichs
+        // Zinssatzbereich festlegen
         document.getElementById('interest_form').onsubmit = function(event) {
             event.preventDefault();
             const minRate = document.getElementById('min_rate').value;
@@ -26,6 +53,32 @@
             })
             .then(response => response.json())
             .then(data => alert(data.message));
+        };
+
+        // Intervall aktualisieren
+        document.getElementById('interval_form').onsubmit = function(event) {
+            event.preventDefault();
+            const interval = document.getElementById('interval').value;
+
+            fetch('/update_interval', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `interval=${interval}`
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message));
+        };
+
+        // Daten zurücksetzen
+        document.getElementById('reset_button').onclick = function() {
+            if (confirm('Bist du sicher, dass du alle Daten zurücksetzen möchtest? Dieser Vorgang kann nicht rückgängig gemacht werden.')) {
+                fetch('/reset_data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => alert(data.message));
+            }
         };
     </script>
 {% endblock %}

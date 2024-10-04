@@ -13,9 +13,14 @@ class Bank:
         self.interest_rate_min = interest_rate_min
         self.interest_rate_max = interest_rate_max
         self.interval = interval
-        self.interest_history = []  # Für den globalen Zinsverlauf
+        self.interest_history = []
         self.data_file = data_file
         self.load_data()
+
+    # Intervall aktualisieren
+    def update_interval(self, new_interval):
+        self.interval = new_interval
+        self.save_data() 
 
     def create_account(self, player_name):
         if player_name not in self.accounts:
@@ -36,7 +41,6 @@ class Bank:
         return f"{player_name} hat kein Konto."
 
     def withdraw(self, player_name, amount):
-        # Neue Methode: Geld auszahlen
         if player_name in self.accounts:
             if self.accounts[player_name] >= amount:
                 self.accounts[player_name] -= amount
@@ -70,6 +74,7 @@ class Bank:
         self.interest_history.append(interest_data)
         self.save_data()
 
+
     def save_data(self):
         data = {
             "accounts": self.accounts,
@@ -97,11 +102,15 @@ class Bank:
 
 bank = Bank()
 
-# Zinsen-Thread (führt alle 5 Minuten zufällige Zinsanwendung aus)
 def interest_thread():
     while True:
-        time.sleep(bank.interval)
+        current_interval = bank.interval  # Aktuelles Intervall erfassen
+        for _ in range(current_interval):
+            time.sleep(1)  # Jede Sekunde warten und das Intervall dynamisch prüfen
+            if current_interval != bank.interval:
+                break  # Wenn sich das Intervall ändert, Schleife verlassen und neu starten
         bank.apply_random_interest()
+
 
 thread = Thread(target=interest_thread)
 thread.daemon = True
@@ -118,9 +127,10 @@ def settings():
         max_rate = float(request.form['max_rate'])
         bank.interest_rate_min = min_rate
         bank.interest_rate_max = max_rate
-        bank.save_data()  # Zinssatz sofort nach der Änderung speichern
+        bank.save_data()
         return jsonify({'message': 'Zinssatzbereich aktualisiert!'})
-    return render_template('settings.html', min_rate=bank.interest_rate_min, max_rate=bank.interest_rate_max)
+    return render_template('settings.html', min_rate=bank.interest_rate_min, max_rate=bank.interest_rate_max, interval=bank.interval)
+
 
 @app.route('/create_account', methods=['GET', 'POST'])
 def create_account():
@@ -164,8 +174,6 @@ def account_detail(player_name):
     else:
         return f"Konto für {player_name} nicht gefunden.", 404
 
-
-
 @app.route('/get_interest_history', methods=['GET'])
 def get_interest_history():
     return jsonify(bank.interest_history)
@@ -174,6 +182,23 @@ def get_interest_history():
 def get_users():
     users = list(bank.accounts.keys())
     return jsonify(users)
+
+@app.route('/reset_data', methods=['POST'])
+def reset_data():
+    bank.accounts = {}
+    bank.account_history = {}
+    bank.interest_history = []
+    bank.interest_rate_min = 0.01
+    bank.interest_rate_max = 0.05
+    bank.save_data()  # Gespeicherte Daten zurücksetzen
+    return jsonify({'message': 'Alle Daten wurden zurückgesetzt!'})
+
+@app.route('/update_interval', methods=['POST'])
+def update_interval():
+    new_interval = int(request.form['interval'])  # Neues Intervall in Sekunden
+    bank.update_interval(new_interval)
+    return jsonify({'message': 'Intervall wurde erfolgreich aktualisiert!'})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
